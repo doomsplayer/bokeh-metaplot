@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
     name = 'bokeh-metaplot',
     packages = ['bokeh_metaplot'], # this must be the same as the name above
-    version = '0.21',
+    version = '0.2.1',
     description = 'a enhanced bokeh plot type which can including some additional infomation inside',
     author = 'Wu Young',
     author_email = 'doomsplayer@gmail.com',

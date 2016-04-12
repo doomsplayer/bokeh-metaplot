@@ -51,13 +51,27 @@ class MetaPlot(Plot):
         self.__post_process__()
 
 class MetaFigure(MetaPlot, Figure):
+    __implementation__ = """
+    Plots = require "models/plots/plot"
+    class MetaFigure extends Plots.Model
+        type: "MetaFigure"
+    module.exports =
+        Model: MetaFigure
+    """
+
     def __post_process__(self):
         super().__post_process__()
         self.y_range.range_padding = 0
         self.x_range.range_padding = 0
 
 class MetaChart(MetaPlot, Chart):
-    pass
+    __implementation__ = """
+    Plots = require "models/plots/plot"
+    class MetaChart extends Plots.Model
+        type: "MetaChart"
+    module.exports =
+        Model: MetaChart
+    """
 
 @dispatch(Plot)
 def metaize(plot, **kwargs):
