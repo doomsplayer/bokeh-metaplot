@@ -2,17 +2,20 @@ from bokeh.core.properties import Dict, String, List
 from bokeh.models import Plot
 from bokeh.plotting import Figure
 from bokeh.charts import Chart
+from bokeh.core.properties import Any, Tuple, Dict, List, Enum, Bool
 from multipledispatch import dispatch
 
-
 __namespace__ = dict()
-
 
 def set_default(dic, key, value):
     if key not in dic:
         dic[key] = value
 
 class MetaPlot(Plot):
+    """
+    @variables stores custom variable, which should be a tuple with the first argument as it's visible modifier, and the second argument as it's value.
+    @category is this plot's category.
+    """
     __implementation__ = """
     Plots = require "models/plots/plot"
     class MetaPlot extends Plots.Model
@@ -20,7 +23,7 @@ class MetaPlot(Plot):
     module.exports =
         Model: MetaPlot
     """
-    variables = Dict(String, String)
+    variables = Dict(String, Tuple(Bool, Any))
     category = List(String)
 
     @staticmethod
